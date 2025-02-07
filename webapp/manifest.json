@@ -1,0 +1,198 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "sapui5.ep.istocks12",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.16.1",
+      "toolsId": "d7ae84dd-6579-4949-902f-48f6010b37fd"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata4/sap/zz_sb_stock_report/srvd/sap/zz_sd_stock_report/0001/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.131.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sapui5.ep.istocks12.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "zz_pv_stock_maraList",
+          "target": "zz_pv_stock_maraList"
+        },
+        {
+          "pattern": "zz_pv_stock_mara({key}):?query:",
+          "name": "zz_pv_stock_maraObjectPage",
+          "target": "zz_pv_stock_maraObjectPage"
+        },
+        {
+          "pattern": "zz_pv_stock_mara({key})/_plant({key2}):?query:",
+          "name": "zz_pv_stock_zite_itecObjectPage",
+          "target": "zz_pv_stock_zite_itecObjectPage"
+        }
+      ],
+      "targets": {
+        "zz_pv_stock_maraList": {
+          "type": "Component",
+          "id": "zz_pv_stock_maraList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/zz_pv_stock_mara",
+              "variantManagement": "Page",
+              "navigation": {
+                "zz_pv_stock_mara": {
+                  "detail": {
+                    "route": "zz_pv_stock_maraObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "zz_pv_stock_maraObjectPage": {
+          "type": "Component",
+          "id": "zz_pv_stock_maraObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.HeaderFacets": {
+                  "facets": {
+                    "columnChart": {
+                      "stashed": true
+                    }
+                  }
+                }
+              },
+              "contextPath": "/zz_pv_stock_mara",
+              "navigation": {
+                "_plant": {
+                  "detail": {
+                    "route": "zz_pv_stock_zite_itecObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "zz_pv_stock_zite_itecObjectPage": {
+          "type": "Component",
+          "id": "zz_pv_stock_zite_itecObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/zz_pv_stock_mara/_plant",
+              "content": {
+                "body": {
+                  "sections": {
+                    "PieChartAssets1": {
+                      "template": "sapui5.ep.istocks12.ext.fragment.PieChartAssets",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "OrderTab"
+                      },
+                      "title": "Chart",
+                      "onSectionLoaded": "sapui5.ep.istocks12.ext.fragment.PieChartAssets.onSectionLoaded"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

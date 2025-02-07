@@ -1,0 +1,21 @@
+<core:FragmentDefinition 
+	xmlns:core="sap.ui.core" 
+	xmlns="sap.m"
+	xmlns:microchart="sap.suite.ui.microchart" >
+
+	<HBox>
+
+		<microchart:InteractiveDonutChart
+			id="idDonutChart"
+			selectionChanged="onSelectionChanged"
+			displayedSegments="8"
+			segments="{_lgort}">
+			<microchart:segments>
+				<microchart:InteractiveDonutChartSegment
+					value="{QuantityStock}"
+					label="{= ${StorageLocation} + ' - ' + ${StorageLocationTxt} }" />
+			</microchart:segments>
+		</microchart:InteractiveDonutChart>
+
+	</HBox>
+</core:FragmentDefinition>
