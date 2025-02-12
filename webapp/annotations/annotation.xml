@@ -40,9 +40,36 @@
                     </Record>
                 </Annotation>
 
-                <Annotation Term="UI.DataPoint" Qualifier="areaChartQualifier"> 
+                <Annotation Term="UI.DataPoint" Qualifier="chrtRadial">
                     <Record Type="UI.DataPointType">
-                        <PropertyValue Property="Value" Path="inventoryLines"/>
+                        <PropertyValue Property="Value" Path="quantityPerc" />
+                        <PropertyValue Property="CriticalityCalculation">
+                        <Record Type="UI.CriticalityCalculationType">
+                        <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize" />
+                        <PropertyValue Property="DeviationRangeLowValue" Decimal="15.00" />
+                        <PropertyValue Property="ToleranceRangeLowValue" Decimal="50.00" />
+                        </Record>
+                    </PropertyValue>
+                    </Record>
+                </Annotation>
+
+                <Annotation Term="UI.Chart" Qualifier="chrtRadial">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut" />
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>quantityPerc</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="MeasureAttributes">
+                            <Collection>
+                                <Record Type="UI.ChartMeasureAttributeType">
+                                    <PropertyValue Property="Measure" PropertyPath="quantityPerc" />
+                                    <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1" />
+                                    <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#chrtRadial" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
                     </Record>
                 </Annotation>
 
@@ -67,43 +94,10 @@
                             <PropertyValue Property="Target" AnnotationPath="_assets/@UI.LineItem"/>
                         </Record>
                     </Collection>
-                </Annotation>                   
-            </Annotations>
+                </Annotation>     
 
-            <Annotations Target="SAP__self.Container/zz_pv_stock_zite_assets">
-                <Annotation Term="UI.PresentationVariant">
-                    <Record Type="UI.PresentationVariantType">
-                        <PropertyValue Property="GroupBy">
-                            <Collection>
-                                <PropertyPath>StorageLocation</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Visualizations">
-                            <Collection>
-                                <AnnotationPath>@UI.LineItem</AnnotationPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
             </Annotations>
-
-            <Annotations Target="SAP__self.zz_pv_stock_zite_assetsType">
-                <Annotation Term="UI.PresentationVariant">
-                    <Record Type="UI.PresentationVariantType">
-                        <PropertyValue Property="GroupBy">
-                            <Collection>
-                                <PropertyPath>StorageLocation</PropertyPath>
-                            </Collection>
-                        </PropertyValue>
-                        <PropertyValue Property="Visualizations">
-                            <Collection>
-                                <AnnotationPath>@UI.LineItem</AnnotationPath>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
-
+            
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>

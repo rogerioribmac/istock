@@ -158,6 +158,20 @@
                     "route": "zz_pv_stock_zite_itecObjectPage"
                   }
                 }
+              },
+              "content": {
+                "body": {
+                  "sections": {
+                    "StackedChart": {
+                      "template": "sapui5.ep.istocks12.ext.StackedChart",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "OrderTab"
+                      },
+                      "title": "Chart"
+                    }
+                  }
+                }
               }
             }
           }
@@ -174,13 +188,13 @@
                 "body": {
                   "sections": {
                     "PieChartAssets1": {
-                      "template": "sapui5.ep.istocks12.ext.fragment.PieChartAssets",
+                      "template": "sapui5.ep.istocks12.ext.PieChartAssets",
                       "position": {
                         "placement": "After",
                         "anchor": "OrderTab"
                       },
                       "title": "Chart",
-                      "onSectionLoaded": "sapui5.ep.istocks12.ext.fragment.PieChartAssets.onSectionLoaded"
+                      "onSectionLoaded": "sapui5.ep.istocks12.ext.PieChartAssets.onSectionLoaded"
                     }
                   }
                 }
